@@ -821,6 +821,21 @@ def download_center_page(segments_df, profiles_df, rfm_df):
     
     st.markdown("Download various reports and visualizations from your analysis.")
     
+    st.subheader("📁 Raw Data")
+    raw_df = load_raw_data()
+    if raw_df is not None:
+        csv_raw = raw_df.to_csv(index=False)
+        st.download_button(
+            label="📥 Download Raw Data (CSV)",
+            data=csv_raw,
+            file_name='raw_banking_data.csv',
+            mime='text/csv'
+        )
+    else:
+        st.error("Raw data file not found. Please ensure 'Data/bank_data_C.csv' exists.")
+    
+    st.markdown("---")
+    
     # Cluster Summary CSV
     st.subheader("📊 Cluster Summary")
     revenue_stats = calculate_revenue_stats(segments_df)
@@ -1097,17 +1112,6 @@ def raw_data_page():
                         st.plotly_chart(fig_revenue, use_container_width=True)
             except Exception as e:
                 st.warning(f"Could not perform time-based analysis: {e}")
-        
-        # Download raw data
-        st.markdown("---")
-        st.subheader("📥 Download Raw Data")
-        csv = raw_df.to_csv(index=False)
-        st.download_button(
-            label="📥 Download Raw Data (CSV)",
-            data=csv,
-            file_name='raw_banking_data.csv',
-            mime='text/csv'
-        )
     else:
         st.error("Raw data file not found. Please ensure 'Data/bank_data_C.csv' exists.")
 
