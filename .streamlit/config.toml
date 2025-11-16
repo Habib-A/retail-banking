@@ -1,0 +1,10 @@
+[theme]
+base = "light"
+
+# Optional: align Streamlit theme colors with your app's light blue styling
+primaryColor = "#0066cc"
+backgroundColor = "#e3f2fd"
+secondaryBackgroundColor = "#bbdefb"
+textColor = "#000000"
+
+
